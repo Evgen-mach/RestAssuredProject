@@ -6,6 +6,8 @@ public class RestAssuredRunner {
                 .log().all()
                 .baseUri("https://api.trello.com")
                 .get()
-                .prettyPeek();
+                .prettyPeek()
+                .then()
+                .statusCode(200);
     }
 }
