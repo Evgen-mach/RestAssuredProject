@@ -10,7 +10,7 @@ public class GoogleTest {
     }
 
     @Test
-    public void checkGoogleApi() {
+    public void checkGoogleHome() {
         RestAssured.given()
                 .log().all()
                 .get()
