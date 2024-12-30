@@ -14,7 +14,7 @@ public class GetBoardsTest {
         RestAssured.baseURI = "https://api.trello.com";
     }
 
-    private static RequestSpecification requestWithAuth() {
+    private RequestSpecification requestWithAuth() {
         return RestAssured.given()
                 .queryParams(Map.of(
                         "key", "6dfe2176e5f391f8414d73603b6a9f77",
