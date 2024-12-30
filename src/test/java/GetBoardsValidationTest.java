@@ -33,16 +33,16 @@ public class GetBoardsValidationTest {
         Assertions.assertEquals("invalid id", response.body().asString());
     }
 
-//    @Test
-//    public void checkGetBoardsWithInvalidAuth() {
-//        Response response = RestAssured.given()
-//                .pathParam("boardId", "675067bee6c044df8c6dadd3")
-//                .get("/1/boards/{boardId}");
-//        response
-//                .then()
-//                .statusCode(401);
-//        Assertions.assertEquals("unauthorized permission request", response.body().asString());
-//    }
+    @Test
+    public void checkGetBoardWithInvalidAuth() {
+        Response response = RestAssured.given()
+                .pathParam("boardId", "675067bee6c044df8c6dadd3")
+                .get("/1/boards/{boardId}");
+        response
+                .then()
+                .statusCode(401);
+        Assertions.assertEquals("unauthorized permission requested", response.body().asString());
+    }
 
     @Test
     public void checkGetBoardWithAnotherUserCredentials() {
