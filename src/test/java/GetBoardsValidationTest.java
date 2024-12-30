@@ -8,7 +8,7 @@ public class GetBoardsValidationTest extends BaseTest {
 
     @Test
     public void checkGetBoardWithInvalidId() {
-        Response response = requestWithoutAuth()
+        Response response = requestWithAuth()
                 .pathParam("boardId", "invalid")
                 .get("/1/boards/{boardId}");
         response
