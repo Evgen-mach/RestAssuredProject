@@ -8,8 +8,8 @@ public class GetBoardsTest extends BaseTest {
     public void checkGetBoards() {
         requestWithAuth()
                 .queryParam("fields", "id,name")
-                .pathParam("memberId", "yauhenim3")
-                .get("/1/members/{memberId}/boards")
+                .pathParam("id", "yauhenim3")
+                .get("/1/members/{id}/boards")
                 .then()
                 .statusCode(200)
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/get_boards.json"));
@@ -19,8 +19,8 @@ public class GetBoardsTest extends BaseTest {
     public void checkGetBoard() {
         requestWithAuth()
                 .queryParam("fields", "id,name")
-                .pathParam("boardId", "675067bee6c044df8c6dadd3")
-                .get("/1/boards/{boardId}")
+                .pathParam("id", "675067bee6c044df8c6dadd3")
+                .get("/1/boards/{id}")
                 .then()
                 .statusCode(200)
                 .body("name", Matchers.equalTo("Test"))
