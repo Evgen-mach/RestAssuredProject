@@ -1,3 +1,5 @@
+import arguments.AuthValidationArgumentsHolder;
+import arguments.AuthValidationArgumentsProvider;
 import arguments.BoardIdValidationArgumentsHolder;
 import arguments.BoardIdValidationArgumentsProvider;
 import io.restassured.response.Response;
@@ -22,9 +24,11 @@ public class GetBoardsValidationTest extends BaseTest {
         Assertions.assertEquals(validationArguments.getErrorMessage(), response.body().asString());
     }
 
-    @Test
-    public void checkGetBoardWithInvalidAuth() {
+    @ParameterizedTest
+    @ArgumentsSource(AuthValidationArgumentsProvider.class)
+    public void checkGetBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments) {
         Response response = requestWithoutAuth()
+                .queryParams(validationArguments.getAuthParams())
                 .pathParam("id", "675067bee6c044df8c6dadd3")
                 .get("/1/boards/{id}");
         response
@@ -45,6 +49,6 @@ public class GetBoardsValidationTest extends BaseTest {
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("invalid token", response.body().asString());
+        Assertions.assertEquals("invalid key", response.body().asString());
     }
 }
