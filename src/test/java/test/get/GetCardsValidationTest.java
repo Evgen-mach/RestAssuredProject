@@ -4,14 +4,14 @@ import arguments.holders.AuthValidationArgumentsHolder;
 import arguments.providers.AuthValidationArgumentsProvider;
 import arguments.holders.CardIdValidationArgumentsHolder;
 import arguments.providers.CardIdValidationArgumentsProvider;
+import consts.CardsEndpoints;
+import consts.UrlParamValues;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import test.BaseTest;
-
-import java.util.Map;
 
 public class GetCardsValidationTest extends BaseTest {
 
@@ -20,7 +20,7 @@ public class GetCardsValidationTest extends BaseTest {
     public void checkGetCardWithInvalidId(CardIdValidationArgumentsHolder validationArguments) {
         Response response = requestWithAuth()
                 .pathParams(validationArguments.getPathParams())
-                .get("/1/cards/{id}");
+                .get(CardsEndpoints.GET_CARD_URL);
         response
                 .then()
                 .statusCode(validationArguments.getStatusCode());
@@ -32,26 +32,23 @@ public class GetCardsValidationTest extends BaseTest {
     public void checkGetCardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments) {
         Response response = requestWithoutAuth()
                 .queryParams(validationArguments.getAuthParams())
-                .pathParam("id", "67582a66bd72066b2a732bed")
-                .get("/1/cards/{id}");
+                .pathParam("id", UrlParamValues.EXISTING_CARD_ID)
+                .get(CardsEndpoints.GET_CARD_URL);
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("unauthorized card permission requested", response.body().asString());
+        Assertions.assertEquals(validationArguments.getErrorMessage(), response.body().asString());
     }
 
     @Test
     public void checkGetCardWithAnotherUserCredentials() {
         Response response = requestWithoutAuth()
-                .queryParams(Map.of(
-                        "key", "6dfe2176e5f391f8414d73603b6a9f77",
-                        "token", "ATTA6cd39dd9b6c03c1bdca8c6c0db90a355f3d5b25ae8fcb8a43833a512af78ea647CF220BE"
-                ))
-                .pathParam("id", "67582a66bd72066b2a732bed")
-                .get("/1/cards/{id}");
+                .queryParams(UrlParamValues.ANOTHER_USER_AUTH_QUERY_PARAMS)
+                .pathParam("id", UrlParamValues.EXISTING_CARD_ID)
+                .get(CardsEndpoints.GET_CARD_URL);
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("invalid key", response.body().asString());
+        Assertions.assertEquals("invalid app token", response.body().asString());
     }
 }

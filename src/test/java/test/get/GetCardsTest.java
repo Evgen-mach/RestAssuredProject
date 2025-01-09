@@ -1,5 +1,7 @@
 package test.get;
 
+import consts.CardsEndpoints;
+import consts.UrlParamValues;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -11,8 +13,8 @@ public class GetCardsTest extends BaseTest {
     public void checkGetCards() {
         requestWithAuth()
                 .queryParam("fields", "id,name")
-                .pathParam("id", "6758283447a428b4f2bc66b8")
-                .get("/1/lists/{id}/cards")
+                .pathParam("id", UrlParamValues.EXISTING_LIST_ID)
+                .get(CardsEndpoints.GET_ALL_CARDS_URL)
                 .then()
                 .statusCode(200)
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/get_cards.json"));
@@ -22,8 +24,8 @@ public class GetCardsTest extends BaseTest {
     public void checkGetCard() {
         requestWithAuth()
                 .queryParam("fields", "id,name")
-                .pathParam("id", "67582a66bd72066b2a732bed")
-                .get("/1/cards/{id}")
+                .pathParam("id", UrlParamValues.EXISTING_CARD_ID)
+                .get(CardsEndpoints.GET_CARD_URL)
                 .then()
                 .statusCode(200)
                 .body("name", Matchers.equalTo("test Card Raw"))
