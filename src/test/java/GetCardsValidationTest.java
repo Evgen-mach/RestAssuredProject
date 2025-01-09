@@ -1,3 +1,5 @@
+import arguments.AuthValidationArgumentsHolder;
+import arguments.AuthValidationArgumentsProvider;
 import arguments.CardIdValidationArgumentsHolder;
 import arguments.CardIdValidationArgumentsProvider;
 import io.restassured.response.Response;
@@ -22,9 +24,11 @@ public class GetCardsValidationTest extends BaseTest{
         Assertions.assertEquals(validationArguments.getErrorMessage(), response.body().asString());
     }
 
-    @Test
-    public void checkGetCardWithInvalidAuth() {
+    @ParameterizedTest
+    @ArgumentsSource(AuthValidationArgumentsProvider.class)
+    public void checkGetCardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments) {
         Response response = requestWithoutAuth()
+                .queryParams(validationArguments.getAuthParams())
                 .pathParam("id", "67582a66bd72066b2a732bed")
                 .get("/1/cards/{id}");
         response
@@ -45,6 +49,6 @@ public class GetCardsValidationTest extends BaseTest{
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("invalid token", response.body().asString());
+        Assertions.assertEquals("invalid key", response.body().asString());
     }
 }
