@@ -1,5 +1,6 @@
-package arguments;
+package arguments.providers;
 
+import arguments.holders.BoardIdValidationArgumentsHolder;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
@@ -7,17 +8,17 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class CardIdValidationArgumentsProvider implements ArgumentsProvider {
+public class BoardIdValidationArgumentsProvider implements ArgumentsProvider {
     @Override
     public Stream provideArguments(ExtensionContext context) {
         return Stream.of(
-                new CardIdValidationArgumentsHolder(
+                new BoardIdValidationArgumentsHolder(
                         Map.of("id","invalid"),
                         "invalid id",
                         400
                 ),
-                new CardIdValidationArgumentsHolder(
-                        Map.of("id","67582a66bd72066b2a732bee"),
+                new BoardIdValidationArgumentsHolder(
+                        Map.of("id","675067bee6c044df8c6dadd4"),
                         "The requested resource was not found.",
                         404
                 )

@@ -1,23 +1,26 @@
-import arguments.AuthValidationArgumentsHolder;
-import arguments.AuthValidationArgumentsProvider;
-import arguments.BoardIdValidationArgumentsHolder;
-import arguments.BoardIdValidationArgumentsProvider;
+package test.get;
+
+import arguments.holders.AuthValidationArgumentsHolder;
+import arguments.providers.AuthValidationArgumentsProvider;
+import arguments.holders.CardIdValidationArgumentsHolder;
+import arguments.providers.CardIdValidationArgumentsProvider;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import test.BaseTest;
 
 import java.util.Map;
 
-public class GetBoardsValidationTest extends BaseTest {
+public class GetCardsValidationTest extends BaseTest {
 
     @ParameterizedTest
-    @ArgumentsSource(BoardIdValidationArgumentsProvider.class)
-    public void checkGetBoardWithInvalidId(BoardIdValidationArgumentsHolder validationArguments) {
+    @ArgumentsSource(CardIdValidationArgumentsProvider.class)
+    public void checkGetCardWithInvalidId(CardIdValidationArgumentsHolder validationArguments) {
         Response response = requestWithAuth()
                 .pathParams(validationArguments.getPathParams())
-                .get("/1/boards/{id}");
+                .get("/1/cards/{id}");
         response
                 .then()
                 .statusCode(validationArguments.getStatusCode());
@@ -26,26 +29,26 @@ public class GetBoardsValidationTest extends BaseTest {
 
     @ParameterizedTest
     @ArgumentsSource(AuthValidationArgumentsProvider.class)
-    public void checkGetBoardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments) {
+    public void checkGetCardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments) {
         Response response = requestWithoutAuth()
                 .queryParams(validationArguments.getAuthParams())
-                .pathParam("id", "675067bee6c044df8c6dadd3")
-                .get("/1/boards/{id}");
+                .pathParam("id", "67582a66bd72066b2a732bed")
+                .get("/1/cards/{id}");
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("unauthorized permission requested", response.body().asString());
+        Assertions.assertEquals("unauthorized card permission requested", response.body().asString());
     }
 
     @Test
-    public void checkGetBoardWithAnotherUserCredentials() {
+    public void checkGetCardWithAnotherUserCredentials() {
         Response response = requestWithoutAuth()
                 .queryParams(Map.of(
                         "key", "6dfe2176e5f391f8414d73603b6a9f77",
                         "token", "ATTA6cd39dd9b6c03c1bdca8c6c0db90a355f3d5b25ae8fcb8a43833a512af78ea647CF220BE"
                 ))
-                .pathParam("id", "675067bee6c044df8c6dadd3")
-                .get("/1/boards/{id}");
+                .pathParam("id", "67582a66bd72066b2a732bed")
+                .get("/1/cards/{id}");
         response
                 .then()
                 .statusCode(401);
