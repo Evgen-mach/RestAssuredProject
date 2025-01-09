@@ -1,8 +1,8 @@
-package arguments;
+package arguments.holders;
 
 import java.util.Map;
 
-public class CardIdValidationArgumentsHolder {
+public class BoardIdValidationArgumentsHolder {
 
     private final Map<String, String> pathParams;
 
@@ -10,7 +10,7 @@ public class CardIdValidationArgumentsHolder {
 
     private final int statusCode;
 
-    public CardIdValidationArgumentsHolder(Map<String, String> pathParams, String errorMessage, int statusCode) {
+    public BoardIdValidationArgumentsHolder(Map<String, String> pathParams, String errorMessage, int statusCode) {
         this.pathParams = pathParams;
         this.errorMessage = errorMessage;
         this.statusCode = statusCode;

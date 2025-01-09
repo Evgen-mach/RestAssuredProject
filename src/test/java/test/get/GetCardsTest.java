@@ -1,6 +1,9 @@
+package test.get;
+
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import test.BaseTest;
 
 public class GetCardsTest extends BaseTest {
 
