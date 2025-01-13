@@ -25,7 +25,7 @@ public class AuthValidationArgumentsProvider implements ArgumentsProvider {
                 ),
                 new AuthValidationArgumentsHolder(
                        Map.of("token", UrlParamValues.VALID_TOKEN),
-                        "invalid key"
+                        "invalid app key"
                )
         ).map(Arguments::of);
     }

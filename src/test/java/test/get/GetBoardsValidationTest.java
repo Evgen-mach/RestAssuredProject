@@ -37,7 +37,7 @@ public class GetBoardsValidationTest extends BaseTest {
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("unauthorized permission requested", response.body().asString());
+        Assertions.assertEquals(validationArguments.getErrorMessage(), response.body().asString());
     }
 
     @Test
@@ -49,6 +49,6 @@ public class GetBoardsValidationTest extends BaseTest {
         response
                 .then()
                 .statusCode(401);
-        Assertions.assertEquals("invalid key", response.body().asString());
+        Assertions.assertEquals("invalid app token", response.body().asString());
     }
 }
