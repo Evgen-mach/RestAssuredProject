@@ -10,18 +10,18 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class AuthValidationArgumentsProvider implements ArgumentsProvider {
+public class AuthCardValidationArgumentsProvider implements ArgumentsProvider {
 
     @Override
     public Stream provideArguments(ExtensionContext context) {
         return Stream.of(
                 new AuthValidationArgumentsHolder(
                         Collections.emptyMap(),
-                        "unauthorized permission requested"
+                        "unauthorized card permission requested"
                 ),
                 new AuthValidationArgumentsHolder(
                         Map.of("key", UrlParamValues.VALID_KEY),
-                        "unauthorized permission requested"
+                        "unauthorized card permission requested"
                 ),
                 new AuthValidationArgumentsHolder(
                        Map.of("token", UrlParamValues.VALID_TOKEN),
