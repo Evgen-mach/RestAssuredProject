@@ -20,6 +20,6 @@ public class UrlParamValues {
     public static final String EXISTING_BOARD_ID = "675067bee6c044df8c6dadd3";
     public static final String USER_NAME = "yauhenim3";
 
-    public static final String EXISTING_CARD_ID = "67582a66bd72066b2a732bed";
+    public static final String EXISTING_CARD_ID = "67caf3c5bf552d13fd6e1d23";
     public static final String EXISTING_LIST_ID = "6758283447a428b4f2bc66b8";
 }

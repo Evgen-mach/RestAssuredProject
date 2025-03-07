@@ -1,8 +1,8 @@
 package test.get;
 
 import arguments.holders.AuthValidationArgumentsHolder;
-import arguments.providers.AuthValidationArgumentsProvider;
 import arguments.holders.CardIdValidationArgumentsHolder;
+import arguments.providers.AuthCardValidationArgumentsProvider;
 import arguments.providers.CardIdValidationArgumentsProvider;
 import consts.CardsEndpoints;
 import consts.UrlParamValues;
@@ -28,7 +28,7 @@ public class GetCardsValidationTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @ArgumentsSource(AuthValidationArgumentsProvider.class)
+    @ArgumentsSource(AuthCardValidationArgumentsProvider.class)
     public void checkGetCardWithInvalidAuth(AuthValidationArgumentsHolder validationArguments) {
         Response response = requestWithoutAuth()
                 .queryParams(validationArguments.getAuthParams())
