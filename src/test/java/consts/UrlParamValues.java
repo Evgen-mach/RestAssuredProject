@@ -18,6 +18,7 @@ public class UrlParamValues {
     );
 
     public static final String EXISTING_BOARD_ID = "675067bee6c044df8c6dadd3";
+    public static final String BOARD_ID_TO_UPDATE = "67939c72708f51d91f3cd404";
     public static final String USER_NAME = "yauhenim3";
 
     public static final String EXISTING_CARD_ID = "67caf3c5bf552d13fd6e1d23";
